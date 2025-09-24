@@ -447,11 +447,11 @@ footer {
     padding: 20px;
 }
 
-/* Image Gallery Section */
+    /* Image Gallery Section */
 .image-gallery-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
     justify-content: center;
 }
 
@@ -461,8 +461,8 @@ footer {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     flex: 1;
-    min-width: 300px;
-    max-width: 400px;
+    min-width: 200px;
+    max-width: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -471,7 +471,8 @@ footer {
 
 .image-card img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: fill;
     border-radius: 8px;
     display: block;
     transition: transform 0.3s ease;
@@ -479,6 +480,33 @@ footer {
 
 .image-card img:hover {
     transform: scale(1.05);
+}
+/* Client Section */
+.client-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.client-logo {
+    max-width: 150px;
+    height: auto;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.client-logo:hover {
+    filter: grayscale(0%) invert(0%);
+    opacity: 1;
+}
+
+/* You might want to remove the extra section-dividers you had,
+   and add one before the "Our Clients" section, as shown here. */
+.section-divider {
+    margin: -50px auto;
 }
 /* Media Queries for Mobile Responsiveness */
 @media (max-width: 768px) {
@@ -528,5 +556,51 @@ footer {
 
     .size-chart-section {
         padding: 30px 10px;
+    }
+}
+/* Animation for Client Logos */
+.client-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 20px 0;
+}
+
+.client-logo-item {
+    opacity: 0;
+    transform: translateY(20px); /* Sets the initial position for the animation */
+}
+
+.client-logo-item.animated {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Assign a different delay to each logo item to create a sequence */
+.client-logo-item.animated:nth-child(1) {
+    animation-delay: 0.2s;
+}
+.client-logo-item.animated:nth-child(2) {
+    animation-delay: 0.4s;
+}
+.client-logo-item.animated:nth-child(3) {
+    animation-delay: 0.6s;
+}
+.client-logo-item.animated:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+/* Keep the existing keyframe animation as is */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
