@@ -52,3 +52,26 @@ document.addEventListener('DOMContentLoaded', () => {
         clientObserver.observe(clientSection);
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ... (Your existing hamburger menu and smooth scroll code) ...
+
+    // Video Gallery Thumbnail Behavior
+    const videos = document.querySelectorAll('#videos video');
+
+    videos.forEach(video => {
+        // Event listener for when the video metadata has loaded
+        video.addEventListener('loadedmetadata', () => {
+            // Set the video's current time to 0.1 seconds
+            video.currentTime = 0.1;
+        });
+
+        // Event listener for when the video has jumped to the desired time
+        video.addEventListener('seeked', () => {
+            // Immediately pause the video to show the thumbnail
+            video.pause();
+        });
+    });
+
+    // ... (Your existing scroll animation code) ...
+});
