@@ -600,6 +600,9 @@ footer {
 .client-logo-item.animated:nth-child(7) {
     animation-delay: 1.4s;
 }
+.client-logo-item.animated:nth-child(8) {
+    animation-delay: 1.6s;
+}
 
 /* Keep the existing keyframe animation as is */
 @keyframes fadeInUp {
