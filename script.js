@@ -1,77 +1,104 @@
+// --- Smooth Scroll Logic ---
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
 
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
+        
+        // Correctly calculates the scroll position based on the new fixed header height
+        const headerHeight = document.querySelector('.header').offsetHeight || 80;
 
         if (targetElement) {
             window.scrollTo({
-                top: targetElement.offsetTop - document.querySelector('header').offsetHeight,
+                top: targetElement.offsetTop - headerHeight,
                 behavior: 'smooth'
             });
         }
     });
 });
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
 
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-});
 
 document.addEventListener('DOMContentLoaded', () => {
-    // ... (your existing hamburger menu and smooth scroll code) ...
+    // 1. Mobile Navigation (Hamburger Menu) Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mainMenu = document.getElementById('mainMenu');
 
-    // Animation for Client Logos on Scroll
-    const clientSection = document.querySelector('#clients');
-    const clientLogos = document.querySelectorAll('.client-logo-item');
-
-    const observerOptions = {
-        root: null, // use the viewport as the root
-        rootMargin: '0px',
-        threshold: 0.5 // trigger when 50% of the section is visible
-    };
-
-    const clientObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                clientLogos.forEach((logo, index) => {
-                    // Add the 'animated' class to trigger the CSS animation
-                    logo.classList.add('animated');
-                });
-                // Stop observing after the animation has been triggered once
-                observer.unobserve(entry.target);
-            }
+    if (menuToggle && mainMenu) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mainMenu.classList.toggle('active');
         });
-    }, observerOptions);
 
-    if (clientSection) {
-        clientObserver.observe(clientSection);
+        // Close mobile menu when clicking on a menu item
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Delay closing the menu for external links or if it's already closed
+                if (mainMenu.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    mainMenu.classList.remove('active');
+                }
+            });
+        });
     }
-});
 
-document.addEventListener('DOMContentLoaded', () => {
-    // ... (Your existing hamburger menu and smooth scroll code) ...
 
-    // Video Gallery Thumbnail Behavior
+    // 2. Video Gallery Thumbnail Behavior (Preview at 0.1s)
     const videos = document.querySelectorAll('#videos video');
 
     videos.forEach(video => {
-        // Event listener for when the video metadata has loaded
+        // Mute the video for better compatibility with this method, if not already done in HTML
+        video.muted = true;
+        
+        // When video metadata is loaded, jump to 0.1s
         video.addEventListener('loadedmetadata', () => {
-            // Set the video's current time to 0.1 seconds
             video.currentTime = 0.1;
         });
 
-        // Event listener for when the video has jumped to the desired time
+        // Once the video has jumped (seeked), pause it to display the frame
         video.addEventListener('seeked', () => {
-            // Immediately pause the video to show the thumbnail
             video.pause();
         });
     });
 
-    // ... (Your existing scroll animation code) ...
+
+    // 3. Image Modal/Lightbox Functionality (NEW)
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const captionText = document.getElementById("caption");
+    const closeBtn = document.querySelector(".close-btn");
+    
+    // Function to open the modal
+    document.querySelectorAll(".gallery-trigger").forEach(img => {
+        img.onclick = function(){
+            modal.style.display = "flex"; // Changed to flex to center the content
+            modalImg.src = this.src;
+            
+            // This line still sets the text, but the CSS keeps it hidden.
+            let captionSource = this.closest('.product-card')?.querySelector('h3')?.textContent || this.alt;
+
+            captionText.textContent = captionSource;
+            // captionText.style.opacity = '1'; <-- REMOVED THIS LINE
+        }
+    });
+
+    // Function to close the modal
+    closeBtn.onclick = function() { 
+        modal.style.display = "none";
+    }
+
+    // Close the modal if the user clicks anywhere outside of the image (on the dark background)
+    modal.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Close the modal with the Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            modal.style.display = "none";
+        }
+    });
+
 });
