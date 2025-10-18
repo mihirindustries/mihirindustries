@@ -102,3 +102,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+// 5. Product Card Slider Functionality (New)
+    const productSliders = document.querySelectorAll('.product-slider');
+
+    productSliders.forEach(slider => {
+        const slidesContainer = slider.querySelector('.slides-container');
+        const slides = slider.querySelectorAll('.slide-image');
+        const prevBtn = slider.querySelector('.prev-btn');
+        const nextBtn = slider.querySelector('.next-btn');
+        const totalSlides = slides.length;
+
+        // Function to update the slide view
+        const updateSlide = (index) => {
+            // Update the data-card-index attribute
+            slider.setAttribute('data-card-index', index); 
+            // Calculate the required horizontal movement
+            slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+        };
+
+        // Attach listeners to buttons
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent the click from triggering the modal/lightbox
+                let currentIndex = parseInt(slider.getAttribute('data-card-index'));
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlide(currentIndex);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent the click from triggering the modal/lightbox
+                let currentIndex = parseInt(slider.getAttribute('data-card-index'));
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlide(currentIndex);
+            });
+        }
+    });

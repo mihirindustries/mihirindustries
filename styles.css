@@ -3,7 +3,7 @@
     --secondary-color: #b68b3c90;
     --text-color: #041216;
     --background-color: #e8eff5;
-    --card-background: #f72828;
+    --card-background: #e8eff5;
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Raleway', sans-serif;
 }
@@ -849,4 +849,76 @@ footer p {
         width: 25px;
         height: 25px;
     }
+}
+/* ---------------------------------------------------------------------- */
+/* PRODUCT CARD SLIDER STYLES (CSS Hover Swap - Safest Method) */
+/* ---------------------------------------------------------------------- */
+
+/* Container to hold and clip the images */
+.slider-container-css {
+    position: relative;
+    width: 100%;
+    /* Keep the fixed height for uniform card appearance */
+    height: 280px; 
+    overflow: hidden;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    background-color: var(--card-background);
+}
+
+/* Wrapper to position the images side-by-side */
+.slider-wrapper-css {
+    display: flex;
+    width: 200%; /* Important: Must be 100% multiplied by the number of slides (2 images = 200%) */
+    height: 100%;
+    transition: transform 0.6s ease; /* Transition for the slide effect */
+}
+
+/* Individual images within the wrapper */
+.slide-image-css {
+    width: 50%; /* Each image takes up 50% of the 200% wrapper width */
+    min-width: 50%;
+    height: 100%;
+    object-fit: contain; 
+    cursor: pointer;
+}
+
+/* ---------------------------------------------------------------------- */
+/* SLIDER INTERACTION (ON HOVER) */
+/* ---------------------------------------------------------------------- */
+.product-card:hover .slider-wrapper-css {
+    /* Moves the wrapper to the left by 50%, showing the second image */
+    transform: translateX(-50%);
+}
+
+/* ---------------------------------------------------------------------- */
+/* OPTIONAL DOTS (Visual indicator of multiple slides) */
+/* ---------------------------------------------------------------------- */
+.slider-dots-css {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: #d9e1e9;
+    border-radius: 50%;
+    transition: background-color 0.6s ease;
+}
+
+/* Highlight the active dot on hover */
+.product-card:hover .dot:nth-child(1) {
+    background-color:  #d9e1e9; /* First dot becomes inactive */
+}
+
+.product-card:hover .dot:nth-child(2) {
+    background-color: #d9e1e9; /* Second dot becomes active */
+}
+
+.dot:nth-child(1) {
+    background-color:  #d9e1e9; /* First dot is active by default */
 }
