@@ -922,3 +922,48 @@ footer p {
 .dot:nth-child(1) {
     background-color:  #d9e1e9; /* First dot is active by default */
 }
+
+/* ---------------------------------------------------------------------- */
+/* BRANDS SECTION (STATIC GRID) */
+/* ---------------------------------------------------------------------- */
+#brands {
+    background-color: var(--background-color); 
+}
+
+#brands h2 {
+    color: var(--primary-color);
+    margin-bottom: 40px;
+}
+
+/* 1. Grid Container for static logos */
+.brand-grid {
+    display: grid;
+    /* Increased the minimum column size slightly to accommodate larger logos */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 2. Styles for the individual logo image (INCREASED SIZE) */
+.brand-logo-img {
+    width: 100%;
+    max-width: 220px; /* Increased Max Width */
+    height: 100px;    /* Increased Fixed Height */
+
+    display: block;
+    
+    /* Logos always show original color and full opacity */
+    opacity: 1;           
+    filter: none;         
+    transition: transform 0.3s ease; 
+}
+
+/* Subtle hover effect */
+.brand-logo-img:hover {
+    opacity: 1;
+    filter: none;
+    transform: scale(1.05); 
+}
