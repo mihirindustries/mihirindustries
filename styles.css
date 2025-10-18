@@ -750,3 +750,103 @@ footer p {
     font-weight: 300;
     letter-spacing: 0.5px;
 }
+/* ---------------------------------------------------------------------- */
+/* REVIEWS/TESTIMONIALS SECTION */
+/* ---------------------------------------------------------------------- */
+#reviews {
+    background-color: var(--dark-section-bg);
+}
+
+#reviews h2 {
+    color: black;
+}
+
+.review-intro {
+    max-width: 800px;
+    margin: -10px auto 40px;
+    font-size: 1.1rem;
+    color: black;
+    text-align: center;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.review-card {
+    background-color:#5b5c5e;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(123, 15, 15, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+}
+
+.review-screenshot {
+    width: 100%;
+    /* Ensure the screenshots are treated as content */
+    object-fit: contain; 
+    height: auto; 
+    border-radius: 10px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .review-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------------------------------------------------------------------- */
+/* WHATSAPP FLOATING BUTTON */
+/* ---------------------------------------------------------------------- */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 25px;
+    right: 25px;
+    /* WhatsApp Green Brand Color */
+    background-color: #25d366; 
+    color: #FFF;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 3000; /* Ensure it's above everything else */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 3px 3px 5px #888;
+}
+
+.whatsapp-float svg {
+    width: 30px; /* Size of the icon inside the button */
+    height: 30px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .whatsapp-float svg {
+        width: 25px;
+        height: 25px;
+    }
+}
