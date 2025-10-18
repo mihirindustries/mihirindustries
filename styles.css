@@ -618,6 +618,9 @@ table th {
 .image-card img:hover {
     transform: scale(1.05);
 }
+/* ---------------------------------------------------------------------- */
+/* CLIENTS SECTION (MARQUEE ANIMATION) */
+/* ---------------------------------------------------------------------- */
 
 /* Client Section (Marquee Animation) */
 .marquee-container {
@@ -647,13 +650,19 @@ table th {
     height: 70px; /* Fixed height for uniform row appearance */
     object-fit: contain; /* Scales image to fit container, preserving aspect ratio */
     /* ----------------------------- */
-    opacity: 0.7;
-    transition: all 0.3s ease;
+    
+    /* FIX: Logos always show original color and full opacity */
+    opacity: 1;           /* Set to 100% visible by default (was 0.7) */
+    filter: none;         /* Ensures no grayscale or other filters are applied */
+    
+    transition: transform 0.3s ease; /* Keep a smooth transition for hover */
     display: block;
 }
 
 .client-logo:hover {
+    /* FIX: Remove opacity change on hover (as it's already 1). Add subtle scale effect. */
     opacity: 1;
+    transform: scale(1.05); /* Subtle zoom for visual feedback */
 }
 
 /* Keyframe for continuous right-to-left movement */
@@ -666,7 +675,6 @@ table th {
         transform: translateX(-50%); 
     }
 }
-
 /* Section Divider */
 .section-divider {
     width: 80%;
