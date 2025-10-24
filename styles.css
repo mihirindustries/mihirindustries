@@ -811,51 +811,75 @@ footer p {
         grid-template-columns: 1fr;
     }
 }
+/* ---------------------------------------------------------------------- */
+/* FLOATING BUTTONS (CALL & WHATSAPP) */
+/* ---------------------------------------------------------------------- */
 
-/* ---------------------------------------------------------------------- */
-/* WHATSAPP FLOATING BUTTON */
-/* ---------------------------------------------------------------------- */
-.whatsapp-float {
+/* Base style for both buttons */
+.whatsapp-float,
+.call-float {
     position: fixed;
     width: 60px;
     height: 60px;
     bottom: 25px;
-    right: 25px;
-    /* WhatsApp Green Brand Color */
-    background-color: #25d366; 
-    color: #FFF;
     border-radius: 50%;
     text-align: center;
     box-shadow: 2px 2px 3px #999;
-    z-index: 3000; /* Ensure it's above everything else */
+    z-index: 3000;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: transform 0.3s ease;
+    text-decoration: none; /* Ensure no underlines */
+    color: #FFF;
 }
 
-.whatsapp-float:hover {
+/* Call Button Specific Styles */
+.call-float {
+    right: 25px; /* Position Call button on the far right */
+    background-color: #3870e2; /* Prominent Blue */
+}
+
+/* WhatsApp Button Specific Styles - Positioned next to Call button */
+.whatsapp-float {
+    right: 95px; /* 25px (Call button) + 60px (button width) + 10px (gap) = 95px */
+    background-color: #25d366; /* WhatsApp Green */
+}
+
+
+.whatsapp-float:hover,
+.call-float:hover {
     transform: scale(1.1);
     box-shadow: 3px 3px 5px #888;
 }
 
-.whatsapp-float svg {
+.whatsapp-float svg,
+.call-float svg {
     width: 30px; /* Size of the icon inside the button */
     height: 30px;
 }
 
-/* Mobile adjustments */
+/* Mobile adjustments (to prevent overlapping on smaller screens) */
 @media (max-width: 768px) {
-    .whatsapp-float {
-        width: 50px;
-        height: 50px;
+    .whatsapp-float,
+    .call-float {
+        width: 40px;
+        height: 40px;
         bottom: 15px;
-        right: 15px;
     }
     
-    .whatsapp-float svg {
-        width: 25px;
-        height: 25px;
+    .call-float {
+        right: 15px; /* Smaller gap on mobile */
+    }
+
+    .whatsapp-float {
+        right: 75px; /* 15px + 50px + 10px = 75px */
+    }
+    
+    .whatsapp-float svg,
+    .call-float svg {
+        width: 15px;
+        height: 15px;
     }
 }
 /* ---------------------------------------------------------------------- */
